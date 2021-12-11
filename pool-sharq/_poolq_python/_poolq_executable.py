@@ -1,4 +1,7 @@
-def _run_poolq(
+import os
+import licorice
+
+def _poolq_executable(
     data_dir,
     barcode_filename,
     conditions_filename,
@@ -42,16 +45,14 @@ def _run_poolq(
         ]
     )
 
-    formatted_runtitle = _format_string_printing_font(
-        "Run name: {}".format(run_name), ["BOLD", "RED"]
-    )
-    _print_underline("Run name: {}".format(run_name))
-    _print_underline("PoolQ executable:", formatting=["BOLD", "CYAN"], n_newline=0)
-    print(executable)
-    print(_format_string_printing_font("-----------------\n", ["BOLD", "CYAN"]))
+    formatted_runtitle = licorice.font_format("Run name: {}".format(run_name), ["BOLD", "RED"])
+    licorice.underline("Run name: {}".format(run_name))
+    licorice.underline("PoolQ executable:", ['BOLD', 'CYAN'])
+    licorice.underline("executable", ['BOLD', 'CYAN'])
+    
     if dry_run:
         print(
-            _format_string_printing_font(
+            licorice.font_format(
                 "\nDry run complete. Please inspect PoolQ executable.", ["BOLD"]
             )
         )
