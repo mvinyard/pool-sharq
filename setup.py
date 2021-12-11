@@ -30,7 +30,7 @@ setup(
     install_requires=[
         "licorice>=0.0.2",
         "pandas>=1.3.4",
-        "BeautifulSoup>=4.10.0",
+        "BeautifulSoup",
     ],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
