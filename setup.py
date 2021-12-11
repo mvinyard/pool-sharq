@@ -1,4 +1,3 @@
-
 # setup.py
 
 __module_name__ = "setup.py"
@@ -25,7 +24,7 @@ setup(
     long_description_content_type="text/markdown",
     description="pool-sharq: python interface for Broad Institute GPP's poolq software.",
     packages=[
-        "pool-sharq",
+        "pool_sharq",
     ],
     install_requires=[
         "licorice>=0.0.2",
