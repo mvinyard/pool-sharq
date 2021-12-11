@@ -36,9 +36,9 @@ def _download_poolq(out_path, poolq_http, latest):
 
     os.system("unzip -q {}".format(tmp_out_path))  # unzip
     os.system("rm -r {}".format(tmp_out_path))  # remove temp zip
-    os.system(
-        "rm -r poolq-{}/test-data/".format(latest)
-    )  # remove uneccesary components (i.e., test data)
+    os.system("rm -r poolq-{}/test-data/".format(latest))
+    os.system("rm -r poolq-{}/*pdf".format(latest))
+    os.system("rm -r poolq-{}/*html".format(latest))
 
     os.system("mv poolq-{} {}".format(latest, out_path))
 
@@ -107,4 +107,5 @@ def _look_for_poolq(path):
     if os.path.exists(_poolq_download_path + "poolq-{}".format(get_pq.latest)):
         print("\nLatest installation of poolq: poolq-{} previously installed.".format(get_pq.latest))
     else:
+        print("\nDownloading...")
         get_pq.download(_poolq_download_path)
