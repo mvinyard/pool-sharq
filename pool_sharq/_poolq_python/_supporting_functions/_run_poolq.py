@@ -1,8 +1,17 @@
 
+__module_name__ = "_run_poolq.py"
+__author__ = ", ".join(["Michael E. Vinyard"])
+__email__ = ", ".join(["vinyard@g.harvard.edu",])
+
+
+# package imports #
+# --------------- #
 import licorice
 import os
 
 
+# local imports #
+# ------------- #
 from ._build_poolq_shell_executable import _build_poolq_shell_executable
 
 
