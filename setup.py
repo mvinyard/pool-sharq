@@ -15,7 +15,7 @@ import sys
 
 setup(
     name="pool-sharq",
-    version="0.0.1",
+    version="0.0.11",
     python_requires=">3.7.0",
     author="Michael E. Vinyard - Harvard University - Massachussetts General Hospital - Broad Institute of MIT and Harvard",
     author_email="mvinyard@broadinstitute.org",
@@ -25,6 +25,8 @@ setup(
     description="pool-sharq: python interface for Broad Institute GPP's poolq software.",
     packages=[
         "pool_sharq",
+        "pool_sharq._fetch",
+        "pool_sharq._poolq_python",
     ],
     install_requires=[
         "beautifulsoup4>=4.10.0",
