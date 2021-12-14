@@ -1,5 +1,13 @@
 
-import glob, os
+__module_name__ = "_get_downloaded_poolq_version.py"
+__author__ = ", ".join(["Michael E. Vinyard"])
+__email__ = ", ".join(["vinyard@g.harvard.edu",])
+
+
+# package imports #
+# --------------- #
+import glob
+import os
 import pyrequisites as pyrex
 
 
