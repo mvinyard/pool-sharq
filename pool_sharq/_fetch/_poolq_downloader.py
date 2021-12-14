@@ -1,3 +1,11 @@
+
+__module_name__ = "_poolq_downloader.py"
+__author__ = ", ".join(["Michael E. Vinyard"])
+__email__ = ", ".join(["vinyard@g.harvard.edu",])
+
+
+# package imports #
+# --------------- #
 from bs4 import BeautifulSoup
 import licorice
 import os
@@ -134,10 +142,10 @@ def _look_for_poolq(path):
     
     _poolq_download_path = os.path.join(os.path.dirname(path), "_distribution/")
 
-    get_pq = _poolq_downloader()
-    get_pq.fetch_available()
-    if os.path.exists(_poolq_download_path + "poolq-{}".format(get_pq.latest)):
-        print("\nLatest installation of poolq: poolq-{} previously installed.".format(get_pq.latest))
+    get_poolq = _poolq_downloader()
+    get_poolq.fetch_available()
+    if os.path.exists(_poolq_download_path + "poolq-{}".format(get_poolq.latest)):
+        print("\nLatest installation of poolq: poolq-{} previously installed.".format(get_poolq.latest))
     else:
         print("\nDownloading...")
-        get_pq.download(_poolq_download_path)
+        get_poolq.download(_poolq_download_path)
