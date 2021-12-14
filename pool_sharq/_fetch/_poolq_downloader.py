@@ -1,8 +1,10 @@
 from bs4 import BeautifulSoup
-import pandas as pd
-import urllib.request
-import os
 import licorice
+import os
+import pandas as pd
+import requests
+from tqdm.notebook import tqdm as tdqm_nb
+import urllib.request
 
 
 def _return_soup(path):
@@ -12,36 +14,60 @@ def _return_soup(path):
     return BeautifulSoup(source, features="html.parser")
 
 
-def _find_latest_version(df):
+def _find_latest_version(df, verbose=True):
 
     latest_version = df["version"].max()
-
-    print(
-        "Latest version of poolq: {}".format(
-            licorice.font_format(latest_version, ["BOLD", "CYAN"])
+    
+    if verbose:
+        print(
+            "Latest version of poolq: {}".format(
+                licorice.font_format(latest_version, ["BOLD", "CYAN"])
+            )
         )
-    )
 
     return latest_version
 
 
-def _download_poolq(out_path, poolq_http, latest):
+def _download_file(url, filename):
+    """
+    Helper method handling downloading large files from `url` to `filename`. Returns a pointer to `filename`.
+    """
+    chunk_size = 1024
+    downloadable = requests.get(url, stream=True)
+    
+    with open(filename, 'wb') as file:
+        progress_bar = tdqm_nb( unit="B", total=int( downloadable.headers['Content-Length'] ) )
+        for chunk in downloadable.iter_content(chunk_size=chunk_size): 
+            if chunk:
+                progress_bar.update (len(chunk))
+                file.write(chunk)
+        progress_bar.close()
+    
+def _download_poolq(out_path, poolq_http, latest, tmp_out_path="poolq.tmp.zip"):
 
     """"""
-
-    tmp_out_path = "poolq.tmp.zip"
-
-    executable = "wget -q -O {} '{}'".format(tmp_out_path, poolq_http)
-    os.system(executable)
-
+    _download_file(url=poolq_http, filename=tmp_out_path)
     os.system("unzip -q {}".format(tmp_out_path))  # unzip
     os.system("rm -r {}".format(tmp_out_path))  # remove temp zip
     os.system("rm -r poolq-{}/test-data/".format(latest))
     os.system("rm -r poolq-{}/*pdf".format(latest))
     os.system("rm -r poolq-{}/*html".format(latest))
-
     os.system("mv poolq-{} {}".format(latest, out_path))
+    
+    
+def _download_tests(out_path, poolq_http, latest, tmp_out_path="poolq.test_data.tmp.zip"):
 
+    """"""
+    _download_file(url=poolq_http, filename=tmp_out_path)
+    os.system("unzip -q {}".format(tmp_out_path))  # unzip
+    os.system("rm -r {}".format(tmp_out_path))  # remove temp zip
+    os.system("rm -r poolq-{}/*.bat".format(latest))
+    os.system("rm -r poolq-{}/*.jar".format(latest))
+    os.system("rm -r poolq-{}/*.sh".format(latest))
+    os.system("rm -r poolq-{}/*pdf".format(latest))
+    os.system("rm -r poolq-{}/*html".format(latest))
+    os.system("mv poolq-{}/test-data/* {}".format(latest, out_path))
+    os.system("rm -r poolq-{}".format(latest))
 
 def _find_available_poolq_versions(poolq_path, download_path):
 
@@ -80,13 +106,13 @@ class _poolq_downloader:
         )
         self.download_path = "https://portals.broadinstitute.org/gpp/public/dir/download?dirpath=poolq-downloads&filename=poolq-{}.zip"
 
-    def fetch_available(self):
+    def fetch_available(self, verbose=True):
         """"""
 
         self.version_df = _find_available_poolq_versions(
             self.poolq_path, self.download_path
         )
-        self.latest = _find_latest_version(self.version_df)
+        self.latest = _find_latest_version(self.version_df, verbose)
 
     def download(self, out_path="./"):
 
@@ -95,6 +121,12 @@ class _poolq_downloader:
         poolq_http = self.download_path.format(self.latest)
         _download_poolq(out_path, poolq_http, self.latest)
         
+    def download_tests(self, out_path):
+        
+        """ """
+        
+        poolq_http = self.download_path.format(self.latest)
+        _download_tests(out_path, poolq_http, self.latest)
         
 def _look_for_poolq(path):
 
