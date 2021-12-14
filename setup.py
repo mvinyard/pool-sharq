@@ -27,12 +27,15 @@ setup(
         "pool_sharq",
         "pool_sharq._fetch",
         "pool_sharq._poolq_python",
+        "pool_sharq._poolq_python._supporting_functions",
     ],
     install_requires=[
         "beautifulsoup4>=4.10.0",
         "licorice>=0.0.2",
         "pandas>=1.3.4",
         "pyrequisites>=0.0.2",
+        "requests>=2.26.0",
+        "tqdm>=4.62.3",
     ],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
