@@ -1,3 +1,9 @@
+
+__module_name__ = "_build_poolq_shell_executable.py"
+__author__ = ", ".join(["Michael E. Vinyard"])
+__email__ = ", ".join(["vinyard@g.harvard.edu",])
+
+
 def _build_poolq_shell_executable(
     poolq_shell_path,
     barcode_file,
