@@ -1,5 +1,5 @@
 
-__module_name__ = "_print_underline.py"
+__module_name__ = "_poolq_module.py"
 __author__ = ", ".join(["Michael E. Vinyard"])
 __email__ = ", ".join(["vinyard@g.harvard.edu",])
 
