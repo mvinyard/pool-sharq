@@ -1,4 +1,11 @@
 
+__module_name__ = "_print_underline.py"
+__author__ = ", ".join(["Michael E. Vinyard"])
+__email__ = ", ".join(["vinyard@g.harvard.edu",])
+
+
+# local imports #
+# ------------- #
 from ._supporting_functions._run_poolq import _run_poolq
 from ._supporting_functions._get_downloaded_poolq_version import _get_downloaded_poolq_version
 
