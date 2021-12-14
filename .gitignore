@@ -13,6 +13,7 @@ develop-eggs/
 dist/
 downloads/
 /pool_sharq/_distribution/
+/pool_sharq/_tests/
 eggs/
 .eggs/
 lib/
