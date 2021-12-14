@@ -27,9 +27,10 @@ setup(
         "pool_sharq",
     ],
     install_requires=[
+        "beautifulsoup4>=4.10.0",
         "licorice>=0.0.2",
         "pandas>=1.3.4",
-        "beautifulsoup4>=4.10.0",
+        "pyrequisites>=0.0.2",
     ],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
