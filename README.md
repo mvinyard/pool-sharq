@@ -13,13 +13,19 @@ pip install pool_sharq
 ### Usage
 
 ```python
-# WARNING: currently under construction 
 import pool_sharq
 
 poolq = pool_sharq.poolq(dir="/path/to/data/") # contains rows.txt and columns.txt along with fastq files. 
 poolq.run()
 ```
 
+### You can also download / use test data provided by the GPP
+```python
+pool_sharq.download_test_data()
+```
 
-To-do:
-- interface poolq module (.sh script) with python executables.
+```python
+poolq = pool_sharq.poolq() # point to test data
+poolq.run()
+```
+
