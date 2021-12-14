@@ -1,5 +1,16 @@
 
+__module_name__ = "_download_test_data.py"
+__author__ = ", ".join(["Michael E. Vinyard"])
+__email__ = ", ".join(["vinyard@g.harvard.edu",])
+
+
+# package imports #
+# --------------- #
 import os
+
+
+# local imports #
+# ------------- #
 from .._fetch._poolq_downloader import _poolq_downloader
 
 def _download_test_data():
